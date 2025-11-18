@@ -22,7 +22,7 @@ export default function FuzzyMatchModal({ open, onClose, eventName, rules, onSel
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[999] bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-999 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
       <div className="bg-white dark:bg-[#0d243a] w-full max-w-md rounded-xl p-6 shadow-xl relative border border-slate-200 dark:border-slate-700">
         
         {/* Close Button */}

@@ -70,20 +70,20 @@ function generateRuleCode(existingRowsAny: any[] = [], counterRef: { current: nu
 export default function UploadFrameworkTable(): JSX.Element {
   // raw headers/rows from recent Excel
   const [rawHeaders, setRawHeaders] = useState<string[]>([]);
-  const [rawRows, setRawRows] = useState<any[]>([]);
+  const [_rawRows, setRawRows] = useState<any[]>([]);
 
   // editable table rows
   const [rows, setRows] = useState<EditableRow[]>([]);
 
   // mapping inferred from upload (kept but not shown in UI now)
-  const [mapping, setMapping] = useState<Record<string, string>>({});
+  const [_mapping, setMapping] = useState<Record<string, string>>({});
 
   // backend loaded rules (used as suggestion source)
   const [backendRules, setBackendRules] = useState<EwsRule[] | any[]>([]);
   const [loadingBackend, setLoadingBackend] = useState(false);
 
   // status
-  const [importedCount, setImportedCount] = useState<number | null>(null);
+  const [_importedCount, setImportedCount] = useState<number | null>(null);
   const [loadingImport, setLoadingImport] = useState(false);
   const [savedDraftExists, setSavedDraftExists] = useState(false);
 

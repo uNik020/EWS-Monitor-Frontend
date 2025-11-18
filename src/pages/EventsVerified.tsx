@@ -3,11 +3,11 @@ import { useEffect, useMemo, useRef, useState, type JSX } from "react";
 import * as XLSX from "xlsx";
 import Fuse from "fuse.js";
 import FileDropzone from "../components/FileDropZone";
-import Button from "../components/ui/Button";
+
 import MatchBadge from "../components/MatchBadge";
 import FuzzyMatchModal from "../components/FuzzyMatchModal";
 import API from "../utils/axios";
-import { CheckCircleIcon } from "@heroicons/react/24/outline";
+
 import type { EwsRule } from "../utils/types";
 
 /**
@@ -53,7 +53,7 @@ export default function UploadEvents(): JSX.Element {
 
   // UI state
   const [activeTab, setActiveTab] = useState<"new" | "old">("new");
-  const [loadingRules, setLoadingRules] = useState(false);
+  const [_loadingRules, setLoadingRules] = useState(false);
   const [rules, setRules] = useState<EwsRule[]>([]);
   const fuseRef = useRef<any | null>(null);
 
@@ -73,8 +73,8 @@ export default function UploadEvents(): JSX.Element {
   const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
 
   // Keep rawHeaders for display/export if needed
-  const [rawHeadersNew, setRawHeadersNew] = useState<string[]>([]);
-  const [rawHeadersOld, setRawHeadersOld] = useState<string[]>([]);
+  const [_rawHeadersNew, setRawHeadersNew] = useState<string[]>([]);
+  const [_rawHeadersOld, setRawHeadersOld] = useState<string[]>([]);
 
   // refs to hold original rules loaded once
   const rulesLoadedRef = useRef(false);
@@ -381,15 +381,15 @@ export default function UploadEvents(): JSX.Element {
   }
 
   // apply suggestion from Fuse (row suggestions stored in matchedRule when parsing; allow replace)
-  function applySuggestion(localId: string, suggestion: EwsRule) {
-    updateRow(localId, {
-      matchedRule: suggestion,
-      matchStatus: "matched",
-      score: 0,
-      change_reported: suggestion.change_reported ?? ("" as any),
-      // optionally fill severity / tat etc into raw event (left in matchedRule)
-    }, activeTab);
-  }
+  // function applySuggestion(localId: string, suggestion: EwsRule) {
+  //   updateRow(localId, {
+  //     matchedRule: suggestion,
+  //     matchStatus: "matched",
+  //     score: 0,
+  //     change_reported: suggestion.change_reported ?? ("" as any),
+  //     // optionally fill severity / tat etc into raw event (left in matchedRule)
+  //   }, activeTab);
+  // }
 
   // --------------------------
   // Save All => POST /events and create alerts for matched new rows
@@ -594,7 +594,7 @@ export default function UploadEvents(): JSX.Element {
 
         <td className="px-3 py-2 align-top">
           {r.matchedRule ? (
-            <div className="text-xs text-slate-700 dark:text-slate-300 max-w-[240px]">
+            <div className="text-xs text-slate-700 dark:text-slate-300 max-w-60">
               {r.matchedRule.change_reported} <span className="text-slate-400">({r.matchedRule.severity})</span>
             </div>
           ) : <div className="text-xs text-slate-400">None</div>}

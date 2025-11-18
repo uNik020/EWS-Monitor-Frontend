@@ -41,7 +41,7 @@ export default function PreviewTable({ headers, rows, limit = 10, className }: P
             >
               {headers.map((h) => (
                 <td key={h} className="px-3 py-2 text-slate-700 dark:text-slate-200 align-top">
-                  <div className="whitespace-pre-wrap max-w-xs break-words">
+                  <div className="whitespace-pre-wrap max-w-xs wrap-break-word">
                     {String(row[h] ?? "")}
                   </div>
                 </td>
