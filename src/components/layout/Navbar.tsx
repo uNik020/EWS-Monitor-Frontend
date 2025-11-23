@@ -29,8 +29,9 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [notifCount, setNotifCount] = useState(0);
 
-  // DARK MODE TOGGLE
-  const [dark, setDark] = useState(() => localStorage.getItem("theme") === "dark");
+  const [dark, setDark] = useState(() => {
+    return localStorage.getItem("theme") === "dark";
+  });
 
   useEffect(() => {
     if (dark) {
@@ -38,9 +39,10 @@ export default function Navbar() {
       localStorage.setItem("theme", "dark");
     } else {
       document.documentElement.classList.remove("dark");
-      localStorage.removeItem("theme");
+      localStorage.setItem("theme", "light");
     }
   }, [dark]);
+
 
   useEffect(() => {
     const loadNotifs = async () => {
